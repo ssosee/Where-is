@@ -5,4 +5,8 @@ The staff consists of Jang Sea-ung (PM and R&D), Nam Yoon-sung (R&D), Kim Sang-i
 
 
 zip file is app for android.
+
 main_controller is arduino coding file.
+
+
+thank you very much. :)
