@@ -1,0 +1,158 @@
+#include <SoftwareSerial.h>
+
+#define Rx 11
+#define Tx 10
+//#define Key 2
+#define R 5 //pwm pin
+#define G 6 //pwm pin
+#define B 9 //pwm pin
+
+int val = 255;
+char LED = '0';
+int mode = 1;
+SoftwareSerial BTSerial(Tx, Rx);   //bluetooth module Tx:Digital 10 Rx:Digital 11
+//volatile char c = ' ';
+
+
+void bluetooth(char LED);
+void LED_off();
+void LED_pwm();
+
+void setup() {
+  //pinMode(Key, OUTPUT);    //HC-08 key
+  //digitalWrite(Key,HIGH);
+  pinMode(R, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(B, OUTPUT);
+
+  Serial.begin(9600);
+  BTSerial.begin(9600);
+  //Serial.println("ATcommand");  //ATcommand Start
+}
+
+void loop() {
+  if (BTSerial.available())
+  {
+    //BTSerial.read();
+    //Serial.write(BTSerial.read());
+    bluetooth(LED);
+  }
+
+  if (Serial.available())
+  {
+    BTSerial.write(Serial.read());
+    //LED = Serial.read();
+    //BTSerial.write(Serial.read());
+    //Serial.println("ATcommand");
+  }
+}
+
+void LED_pwm() //connect
+{
+  analogWrite(R, 255);
+  analogWrite(G, abs(val-255));
+  analogWrite(B, abs(val-255));
+  delay(10);
+}
+
+void LED_green() //0~33%
+{
+  digitalWrite(R, LOW);
+  digitalWrite(G, HIGH);
+  digitalWrite(B, LOW);
+}
+
+void LED_blue() //33 ~ 66%
+{
+  analogWrite(R, 255);
+  analogWrite(G, 0);
+  analogWrite(B, 0);
+}
+
+void LED_red() //66 ~ 100%
+{
+  while(1){
+  digitalWrite(R, HIGH);
+  digitalWrite(G, LOW);
+  digitalWrite(B, LOW);
+  delay(1000);
+  LED_off();
+  }
+}
+
+void LED_off()
+{
+  analogWrite(R, LOW);
+  analogWrite(G, LOW);
+  analogWrite(B, LOW);
+}
+
+void LED_on()
+{
+  analogWrite(R, HIGH);
+  analogWrite(G, HIGH);
+  analogWrite(B, HIGH);
+}
+
+void bluetooth(char LED)
+{
+  if(BTSerial.available())
+  {
+    LED = BTSerial.read();
+    if(LED == '1')
+    {
+      mode = 1;
+      while(mode != 3)
+      {
+        if(mode == 1) //빨강에서 흰색으로 출발
+        {
+          for(val = 255; val < 256; val--)
+          {
+            LED = BTSerial.read();
+            LED_pwm();
+            if(val == 0)
+            {
+              mode = 2;
+              break;
+            }
+            if(LED == '2')
+            {
+              //LED_green();
+              mode = 3;
+              break;
+            }
+          }
+        }
+        if(mode == 2) //흰색에서 빨강으로 출발
+        {
+          for(val = 1; val <256; val++)
+          {
+            LED = BTSerial.read();
+            LED_pwm();
+            if(val == 255)
+            {
+              mode = 1;
+              break;
+            }
+            if(LED == '2')
+            {
+              //LED_green();
+              mode = 3;
+              break;
+            }
+          }
+        }
+      } //while문 끝
+    } //if LED 끝
+    else if(LED == '2')
+    {
+      while(1){
+        digitalWrite(R, LOW);
+        digitalWrite(G, HIGH);
+        digitalWrite(B, LOW);
+        delay(1000);
+        digitalWrite(G, LOW);
+      }
+    }
+  }
+}
