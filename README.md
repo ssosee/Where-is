@@ -10,3 +10,7 @@ main_controller is arduino coding file.
 
 
 thank you very much. :)
+
+
+## 수상
+![image](https://user-images.githubusercontent.com/42672362/197442307-e8a7eab2-b12d-4126-a179-a2dec17cdcde.png)
