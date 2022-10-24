@@ -26,7 +26,8 @@ thank you very much. :)
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/42672362/197442770-07241132-3d4c-42c3-b4c1-f4c614bb46b8.png">
 <br><br>
 ### awards-paper
-![image](https://user-images.githubusercontent.com/42672362/197442307-e8a7eab2-b12d-4126-a179-a2dec17cdcde.png)
+![image](https://user-images.githubusercontent.com/42672362/197443622-a5022681-0db1-481b-8040-a64751978890.png)
+
 
 ## news
 * https://news.mt.co.kr/mtview.php?no=2019080216197474046
