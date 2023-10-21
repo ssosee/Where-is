@@ -35,7 +35,7 @@ thank you very much. :)
 ![image](https://user-images.githubusercontent.com/42672362/197443622-a5022681-0db1-481b-8040-a64751978890.png)
 
 ## News
-* https://news.mt.co.kr/mtview.php?no=2019080216197474046
+* [한국산기대, 2019년 창의적 사업계획서 경진대회 시상식](https://news.mt.co.kr/mtview.php?no=2019080216197474046)
 
 
 
